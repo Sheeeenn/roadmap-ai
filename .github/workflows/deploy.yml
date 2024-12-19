@@ -6,11 +6,18 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 60  # Increase the timeout limit if needed
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up FTP
-        run: sudo apt-get install -y lftp
+        run: |
+          echo "Installing lftp..."
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          echo "lftp installed successfully"
+
       - name: Deploy to Hostinger via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -21,6 +28,6 @@ jobs:
           open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER
           set ftp:passive-mode true  # Enable passive mode if needed
           set net:timeout 300  # Increase timeout to 5 minutes
-          mirror -R ./ /public_html/TestEnvironment --delete --parallel=5  # Enable parallel transfers (5 connections)
+          mirror -R ./ /public_html/TestEnvironment --delete --parallel=10 --ignore-time --no-syslog
           quit
           "
