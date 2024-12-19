@@ -1,21 +1,16 @@
 name: Deploy to Hostinger
-
 on:
   push:
     branches:
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Set up FTP
         run: sudo apt-get install -y lftp
-
       - name: Deploy to Hostinger via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -24,6 +19,8 @@ jobs:
         run: |
           lftp -f "
           open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER
-          mirror -R ./ /public_html/TestEnvironment --delete
+          set ftp:passive-mode true  # Enable passive mode if needed
+          set net:timeout 300  # Increase timeout to 5 minutes
+          mirror -R ./ /public_html/TestEnvironment --delete --parallel=5  # Enable parallel transfers (5 connections)
           quit
           "
