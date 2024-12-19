@@ -1,0 +1,57 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+nav{
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand{
+    font-weight: bold;
+    color: #2EBBD4;
+}
+
+.loginBtn{
+    background: linear-gradient( #30D6F3, #2EBBD4);
+    border: none; 
+    color: white;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: ease-in-out 2s;
+}
+
+.loginBtn:hover{
+    background: linear-gradient(90deg, #2EBBD4, #30D6F3); 
+}
+
+.signUpBtn{
+    background: linear-gradient( #1A97AE, #126878);
+    border: none; 
+    color: white;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+    border-radius: 30px; 
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: ease-in-out 2s;
+}
+
+.signUpBtn:hover{
+    background: linear-gradient(90deg, #126878, #1A97AE); 
+}
+
+ 
+@media (max-width: 992px) {
+    .loginBtn{
+        margin-top: 10px;
+    }
+    .signUpBtn{
+        margin-top: 10px;
+    }
+}
